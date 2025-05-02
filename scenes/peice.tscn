@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cew0ijgoxd5ve"]
+
+[ext_resource type="Texture2D" uid="uid://lb4o5yfq4b68" path="res://icon.svg" id="1_fdlkn"]
+[ext_resource type="Script" path="res://scenes/peice.gd" id="1_r5k5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aksdb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33dm3"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uebnu"]
+size = Vector2(3, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbak7"]
+size = Vector2(22, 22)
+
+[node name="Peice" type="Node2D"]
+script = ExtResource("1_r5k5i")
+
+[node name="collision" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="collision"]
+shape = SubResource("RectangleShape2D_aksdb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.078125, 0.078125)
+texture = ExtResource("1_fdlkn")
+
+[node name="area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="shape" type="CollisionShape2D" parent="area"]
+shape = SubResource("RectangleShape2D_33dm3")
+
+[node name="detector" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="shape" type="CollisionShape2D" parent="detector"]
+shape = SubResource("RectangleShape2D_uebnu")
+
+[node name="bound" type="Area2D" parent="."]
+collision_layer = 16384
+collision_mask = 16384
+
+[node name="shape" type="CollisionShape2D" parent="bound"]
+shape = SubResource("RectangleShape2D_gbak7")
+
+[connection signal="input_event" from="collision" to="." method="_on_collision_input_event"]
+[connection signal="area_shape_entered" from="area" to="." method="_on_area_area_shape_entered"]
+[connection signal="area_entered" from="bound" to="." method="_on_bound_area_entered"]

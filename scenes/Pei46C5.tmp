@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmlv77cx674e"]
+
+[ext_resource type="Script" path="res://scenes/peices.gd" id="1_pwfmi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oakhh"]
+size = Vector2(482, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmlyr"]
+size = Vector2(484, 22)
+
+[node name="Peices" type="Node2D"]
+script = ExtResource("1_pwfmi")
+
+[node name="scroll" type="Area2D" parent="."]
+
+[node name="shape" type="CollisionShape2D" parent="scroll"]
+position = Vector2(239, 52)
+shape = SubResource("RectangleShape2D_oakhh")
+
+[node name="leave" type="Area2D" parent="."]
+collision_layer = 32768
+
+[node name="shape" type="CollisionShape2D" parent="leave"]
+position = Vector2(240, -56)
+shape = SubResource("RectangleShape2D_cmlyr")
+
+[connection signal="input_event" from="scroll" to="." method="_on_scroll_input_event"]
+[connection signal="mouse_exited" from="scroll" to="." method="_on_scroll_mouse_exited"]
+[connection signal="area_entered" from="leave" to="." method="_on_leave_area_entered"]

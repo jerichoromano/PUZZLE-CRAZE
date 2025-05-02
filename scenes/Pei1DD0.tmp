@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmlv77cx674e"]
+
+[ext_resource type="Script" path="res://scenes/peices.gd" id="1_pwfmi"]
+
+[node name="Peices" type="Node2D"]
+script = ExtResource("1_pwfmi")
+
+[node name="container" type="ScrollContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+vertical_scroll_mode = 0
+
+[node name="panel" type="Panel" parent="container"]
+layout_mode = 2

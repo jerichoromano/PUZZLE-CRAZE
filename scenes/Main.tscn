@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://8rxup4a6421d"]
+
+[ext_resource type="PackedScene" uid="uid://lfdyp8f0v353" path="res://scenes/board.tscn" id="1_getn4"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_sv46k"]
+[ext_resource type="PackedScene" uid="uid://cew0ijgoxd5ve" path="res://scenes/peice.tscn" id="2_87db0"]
+[ext_resource type="Texture2D" uid="uid://dv2f6rw0ty7kj" path="res://images.jpg" id="3_dx3am"]
+[ext_resource type="Texture2D" uid="uid://cxjrt41ws2yft" path="res://background.png" id="4_0x4ps"]
+[ext_resource type="PackedScene" uid="uid://cmlv77cx674e" path="res://scenes/Peices.tscn" id="5_5qjje"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_sv46k")
+grid_size = Vector2(5, 5)
+piece_scene = ExtResource("2_87db0")
+texture = ExtResource("3_dx3am")
+
+[node name="background" type="TextureRect" parent="."]
+offset_left = -132.0
+offset_top = -2.0
+offset_right = 913.0
+offset_bottom = 864.0
+texture = ExtResource("4_0x4ps")
+
+[node name="Peices" parent="." instance=ExtResource("5_5qjje")]
+position = Vector2(3, 747)
+
+[node name="Board" parent="." instance=ExtResource("1_getn4")]
+position = Vector2(59, 167)
+
+[node name="reference" type="TextureRect" parent="."]
+offset_left = 405.0
+offset_top = 45.0
+offset_right = 468.0
+offset_bottom = 112.0
+expand_mode = 2
+stretch_mode = 3
