@@ -14,23 +14,23 @@ piece_scene = ExtResource("2_87db0")
 texture = ExtResource("3_dx3am")
 
 [node name="background" type="TextureRect" parent="."]
-offset_left = -132.0
-offset_top = -2.0
-offset_right = 913.0
-offset_bottom = 864.0
+offset_left = -372.0
+offset_top = -208.0
+offset_right = 833.0
+offset_bottom = 1201.0
 texture = ExtResource("4_0x4ps")
 
 [node name="Peices" parent="." instance=ExtResource("5_5qjje")]
-position = Vector2(3, 747)
+position = Vector2(6, 909)
 
 [node name="Board" parent="." instance=ExtResource("1_getn4")]
-position = Vector2(59, 167)
+position = Vector2(64, 279)
 
 [node name="reference" type="TextureRect" parent="."]
-offset_left = 405.0
-offset_top = 45.0
-offset_right = 468.0
-offset_bottom = 112.0
+offset_left = 358.0
+offset_top = 61.0
+offset_right = 490.0
+offset_bottom = 200.0
 expand_mode = 2
 stretch_mode = 3
 

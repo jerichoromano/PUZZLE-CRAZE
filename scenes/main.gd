@@ -5,7 +5,7 @@ extends Node2D
 @export var texture: Texture2D
 var distortion_size = 20  # Strength of jigsaw distortion
 var edge_data = {}
-var actual_size = Vector2(450, 450)
+var actual_size = Vector2(470, 470)
 var polygons = []
 var cell_size = Vector2(100, 100)
 var max_dimension
@@ -25,7 +25,7 @@ func _ready():
 	var piece_texture = ImageTexture.create_from_image(piece_image)
 	$reference.name = "reference"
 	$reference.texture = piece_texture
-	$reference.scale = Vector2(0.4, 0.4)
+	$reference.scale = Vector2(0.7, 0.7)
 	
 	
 

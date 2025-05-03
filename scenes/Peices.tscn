@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scenes/peices.gd" id="1_pwfmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oakhh"]
-size = Vector2(482, 104)
+size = Vector2(513, 104)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmlyr"]
-size = Vector2(484, 22)
+size = Vector2(511, 22)
 
 [node name="Peices" type="Node2D"]
 script = ExtResource("1_pwfmi")
@@ -14,14 +14,14 @@ script = ExtResource("1_pwfmi")
 [node name="scroll" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="scroll"]
-position = Vector2(239, 52)
+position = Vector2(254.5, 52)
 shape = SubResource("RectangleShape2D_oakhh")
 
 [node name="leave" type="Area2D" parent="."]
 collision_layer = 32768
 
 [node name="shape" type="CollisionShape2D" parent="leave"]
-position = Vector2(240, -93)
+position = Vector2(253.5, -93)
 shape = SubResource("RectangleShape2D_cmlyr")
 
 [connection signal="area_entered" from="scroll" to="." method="_on_scroll_area_entered"]

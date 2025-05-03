@@ -17,10 +17,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=854
+window/size/viewport_width=512
+window/size/viewport_height=1015
 window/size/initial_position_type=0
-window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/handheld/orientation=1
