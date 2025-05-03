@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r8rl1jbllsgm"
-path="res://.godot/imported/cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg-59f03b1679297772562f7fbb32f1730a.ctex"
+uid="uid://c0c77sknw12gs"
+path="res://.godot/imported/1090052-robin-robin.webp-de0b42e63d5723913b546c4f8cb2d58e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg"
-dest_files=["res://.godot/imported/cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg-59f03b1679297772562f7fbb32f1730a.ctex"]
+source_file="res://images/1090052-robin-robin.webp"
+dest_files=["res://.godot/imported/1090052-robin-robin.webp-de0b42e63d5723913b546c4f8cb2d58e.ctex"]
 
 [params]
 

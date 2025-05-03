@@ -5,8 +5,8 @@ func _ready():
 	var parent = get_parent()
 	var image = parent.texture.get_image()
 	self.scale = parent.actual_size / Vector2(parent.max_dimension, parent.max_dimension)
-	$backgrund.position = Vector2(-parent.cell_size.x * 0.5, -parent.cell_size.y * 0.5)
 	$backgrund.size = parent.cell_size * parent.grid_size
+	$backgrund.position = Vector2(-parent.cell_size.x * 0.5, -parent.cell_size.y * 0.5)
 	
 	for x in range(parent.grid_size.x):
 		for y in range(parent.grid_size.y):
@@ -45,5 +45,4 @@ func _ready():
 			
 			piece.add_child(outline)  # Add outline to the piece
 			
-			piece.position = piece.position
 			add_child(piece)

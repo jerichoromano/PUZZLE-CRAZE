@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0xn514qh0fe7"
-path="res://.godot/imported/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg-f15134e1590f5a413b69028286fdbc5c.ctex"
+uid="uid://bjuv6rtexqmmq"
+path="res://.godot/imported/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg-bf9a8f28ef58f010552f11f237305b1d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg"
-dest_files=["res://.godot/imported/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg-f15134e1590f5a413b69028286fdbc5c.ctex"]
+source_file="res://images/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg"
+dest_files=["res://.godot/imported/nature-background-high-resolution-wallpaper-for-a-serene-and-stunning-view-photo.jpg-bf9a8f28ef58f010552f11f237305b1d.ctex"]
 
 [params]
 

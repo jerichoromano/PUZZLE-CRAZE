@@ -14,6 +14,9 @@ config/name="gigsaw"
 run/main_scene="res://scenes/home.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+run/size/resizable=false
+run/size/viewport_height=2400
+run/size/viewport_width=412
 
 [display]
 

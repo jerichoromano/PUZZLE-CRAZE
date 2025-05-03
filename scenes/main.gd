@@ -1,8 +1,9 @@
 extends Node2D
 
-@export var grid_size: Vector2 = Vector2(10, 10)
 @export var piece_scene: PackedScene
-@export var texture: Texture2D
+var texture_folder_path: String = "res://images"
+var grid_size: Vector2 = Vector2(10, 10)
+var texture: Texture2D
 var distortion_size = 20  # Strength of jigsaw distortion
 var edge_data = {}
 var actual_size = Vector2(470, 470)
@@ -11,6 +12,18 @@ var cell_size = Vector2(100, 100)
 var max_dimension
 
 func _ready():
+	randomize()  # Initialize random seed
+
+	var grid_x = randi_range(2, 7)
+	var grid_y = randi_range(2, 7)
+	grid_size = Vector2(grid_x, grid_y)
+	
+	texture = load_random_texture_from_folder(texture_folder_path)
+	
+	if texture == null:
+		push_error("No valid textures found in folder!")
+		return
+	
 	max_dimension = min(texture.get_size().x, texture.get_size().y)
 	cell_size = Vector2(max_dimension / grid_size.x, max_dimension / grid_size.y)
 	
@@ -25,7 +38,9 @@ func _ready():
 	var piece_texture = ImageTexture.create_from_image(piece_image)
 	$reference.name = "reference"
 	$reference.texture = piece_texture
-	$reference.scale = Vector2(0.7, 0.7)
+	$reference.stretch_mode = TextureRect.STRETCH_SCALE
+	$reference.size = Vector2(150, 150)  # Or use rect_size in Godot 3.x
+	
 	
 	
 
@@ -86,3 +101,26 @@ func create_jigsaw_polygon(position: Vector2, size: Vector2, left: float, top: f
 	poly.position = position
 	return poly
 	
+func load_random_texture_from_folder(folder_path: String) -> Texture2D:
+	var dir = DirAccess.open(folder_path)
+	if dir == null:
+		push_error("Cannot open folder: " + folder_path)
+		return null
+	
+	var textures := []
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir():
+			if file_name.ends_with(".png") or file_name.ends_with(".jpg") or file_name.ends_with(".webp"):
+				var full_path = folder_path + "/" + file_name
+				var tex = load(full_path)
+				if tex is Texture2D:
+					textures.append(tex)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	
+	if textures.size() == 0:
+		return null
+	
+	return textures[randi() % textures.size()]
