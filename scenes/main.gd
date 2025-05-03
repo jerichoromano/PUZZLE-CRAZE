@@ -124,3 +124,13 @@ func load_random_texture_from_folder(folder_path: String) -> Texture2D:
 		return null
 	
 	return textures[randi() % textures.size()]
+
+
+func _on_restart_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/Main.tscn")
+	pass # Replace with function body.
+
+
+func _on_quit_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/Home.tscn")
+	pass # Replace with function body.

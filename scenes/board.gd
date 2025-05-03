@@ -3,10 +3,14 @@ extends Node2D
 func _ready():
 	await get_tree().process_frame  # Wait one frame for parent to finish _ready()
 	var parent = get_parent()
-	var image = parent.texture.get_image()
+	
+	self.position = Vector2(get_viewport().size)/2
 	self.scale = parent.actual_size / Vector2(parent.max_dimension, parent.max_dimension)
+	
+	
+	var image = parent.texture.get_image()
 	$backgrund.size = parent.cell_size * parent.grid_size
-	$backgrund.position = Vector2(-parent.cell_size.x * 0.5, -parent.cell_size.y * 0.5)
+	$backgrund.position = -$backgrund.size/2
 	
 	for x in range(parent.grid_size.x):
 		for y in range(parent.grid_size.y):
@@ -17,8 +21,8 @@ func _ready():
 			piece.get_node('collision').queue_free()
 			piece.get_node('area').queue_free()
 			
-			piece.position = Vector2(x * parent.cell_size.x, y * parent.cell_size.y)
-			var region = Rect2(piece.position, parent.cell_size * 1.4)
+			piece.position = Vector2(x * parent.cell_size.x, y * parent.cell_size.y) + (Vector2(parent.cell_size.x, parent.cell_size.y)/2) - $backgrund.size/2
+			var region = Rect2(Vector2(x * parent.cell_size.x, y * parent.cell_size.y), parent.cell_size * 1.4)
 
 			var piece_image = image.get_region(region)
 			var piece_texture = ImageTexture.create_from_image(piece_image)
