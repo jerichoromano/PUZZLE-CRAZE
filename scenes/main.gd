@@ -102,27 +102,26 @@ func create_jigsaw_polygon(position: Vector2, size: Vector2, left: float, top: f
 	return poly
 	
 func load_random_texture_from_folder(folder_path: String) -> Texture2D:
-	var dir = DirAccess.open(folder_path)
-	if dir == null:
-		push_error("Cannot open folder: " + folder_path)
-		return null
-	
+	# Manually list textures instead of reading the folder
+	var texture_paths = [
+		"res://images/1.webp",
+		"res://images/2.jpg",
+		"res://images/3.jpg",
+		"res://images/4.jpg",
+		"res://images/5.jpg",
+		# Add all expected image paths here
+	]
+
 	var textures := []
-	dir.list_dir_begin()
-	var file_name = dir.get_next()
-	while file_name != "":
-		if not dir.current_is_dir():
-			if file_name.ends_with(".png") or file_name.ends_with(".jpg") or file_name.ends_with(".webp"):
-				var full_path = folder_path + "/" + file_name
-				var tex = load(full_path)
-				if tex is Texture2D:
-					textures.append(tex)
-		file_name = dir.get_next()
-	dir.list_dir_end()
-	
+	for path in texture_paths:
+		var tex = load(path)
+		if tex is Texture2D:
+			textures.append(tex)
+
 	if textures.size() == 0:
+		push_error("No valid textures found in hardcoded list!")
 		return null
-	
+
 	return textures[randi() % textures.size()]
 
 

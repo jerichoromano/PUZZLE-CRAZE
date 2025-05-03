@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duyqyfnuj0u4t"
-path="res://.godot/imported/cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg-f6ebd1d2cab21d65a23fc644894f64f3.ctex"
+uid="uid://c4cqe62b75bd2"
+path="res://.godot/imported/2.jpg-12ca71b68ac1f03daba812bff7897f14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg"
-dest_files=["res://.godot/imported/cinderella-and-mouse-0610223a-68fe-4fcb-87b2-ed6d4efbd4fe.jpg-f6ebd1d2cab21d65a23fc644894f64f3.ctex"]
+source_file="res://images/2.jpg"
+dest_files=["res://.godot/imported/2.jpg-12ca71b68ac1f03daba812bff7897f14.ctex"]
 
 [params]
 

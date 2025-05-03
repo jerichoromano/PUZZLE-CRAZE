@@ -2,9 +2,10 @@ extends Node2D
 
 func _ready():
 	await get_tree().process_frame  # Wait one frame for parent to finish _ready()
+	await get_tree().process_frame
 	var parent = get_parent()
 	
-	self.position = Vector2(get_viewport().size)/2
+	self.position = Vector2(get_viewport().get_visible_rect().size)/2
 	self.scale = parent.actual_size / Vector2(parent.max_dimension, parent.max_dimension)
 	
 	

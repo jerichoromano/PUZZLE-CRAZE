@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/peices.gd" id="1_pwfmi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oakhh"]
-size = Vector2(513, 104)
+size = Vector2(513, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmlyr"]
 size = Vector2(511, 22)
@@ -14,7 +14,7 @@ script = ExtResource("1_pwfmi")
 [node name="scroll" type="Area2D" parent="."]
 
 [node name="shape" type="CollisionShape2D" parent="scroll"]
-position = Vector2(254.5, 52)
+position = Vector2(254.5, 84)
 shape = SubResource("RectangleShape2D_oakhh")
 
 [node name="leave" type="Area2D" parent="."]
