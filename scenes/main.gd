@@ -26,6 +26,8 @@ func _ready():
 	$reference.name = "reference"
 	$reference.texture = piece_texture
 	$reference.scale = Vector2(0.4, 0.4)
+	
+	
 
 func generate_polygon_grid(grid_size: Vector2, cell_size: Vector2):
 	var polygons= []

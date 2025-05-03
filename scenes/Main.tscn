@@ -33,3 +33,9 @@ offset_right = 468.0
 offset_bottom = 112.0
 expand_mode = 2
 stretch_mode = 3
+
+[node name="timer" type="Label" parent="."]
+offset_left = 159.0
+offset_top = 16.0
+offset_right = 199.0
+offset_bottom = 39.0

@@ -22,4 +22,10 @@ window/size/viewport_height=854
 window/size/initial_position_type=0
 window/size/resizable=false
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_width"
+window/handheld/orientation=1
+
+[rendering]
+
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
