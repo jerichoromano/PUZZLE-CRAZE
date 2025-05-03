@@ -63,12 +63,6 @@ func _process(delta: float) -> void:
 		handle_drag()
 	else:
 		apply_momentum(delta)
-	
-	for piece in pieces:
-		if is_instance_valid(piece):
-			return
-	
-	get_tree().change_scene_to_file("res://scenes/gameOver.tscn")
 
 func handle_drag():
 	var mouse_x = get_global_mouse_position().x

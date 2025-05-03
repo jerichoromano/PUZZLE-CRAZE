@@ -1,9 +1,11 @@
 extends Node2D
 
+var pieces = []
+var parent
+
 func _ready():
 	await get_tree().process_frame  # Wait one frame for parent to finish _ready()
-	await get_tree().process_frame
-	var parent = get_parent()
+	parent = get_parent()
 	
 	self.position = Vector2(get_viewport().get_visible_rect().size)/2
 	self.scale = parent.actual_size / Vector2(parent.max_dimension, parent.max_dimension)
@@ -50,4 +52,24 @@ func _ready():
 			
 			piece.add_child(outline)  # Add outline to the piece
 			
+			pieces.append(piece)
 			add_child(piece)
+
+func _process(delta: float) -> void:
+	var playerLabel = 0
+	var aiLabel = 0
+	for piece in pieces:
+		if(piece.type == "PLAYER"): playerLabel = playerLabel + 1
+		if(piece.type == "AI"): aiLabel = aiLabel + 1
+
+	parent.playerLabel.text = str(playerLabel)
+	parent.aiLabel.text = str(aiLabel)
+	
+	
+	if(playerLabel + aiLabel == pieces.size()): 
+		var game_over_scene = load("res://scenes/gameOver.tscn").instantiate()
+		game_over_scene.playerTxt = playerLabel
+		game_over_scene.aiTxt = aiLabel
+		
+		get_tree().root.add_child(game_over_scene)
+		get_tree().current_scene.queue_free()  # Optional: remove current scene

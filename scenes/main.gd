@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var playerLabel: Label
+@export var aiLabel: Label
 @export var piece_scene: PackedScene
 var texture_folder_path: String = "res://images"
 var grid_size: Vector2 = Vector2(10, 10)

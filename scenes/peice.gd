@@ -4,6 +4,7 @@ var selected = false
 var original_position: Vector2
 var index = 0
 var defaultIndex = 0
+var type = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,6 +39,7 @@ func _on_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: 
 	if self.name == area.get_parent().name:
 		area.get_parent().get_node('image').visible = true
 		area.get_parent().get_node('outline').queue_free()
+		area.get_parent().type = "PLAYER"
 		self.queue_free()
 		
 
