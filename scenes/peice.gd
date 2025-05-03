@@ -39,6 +39,7 @@ func _on_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: 
 		area.get_parent().get_node('image').visible = true
 		area.get_parent().get_node('outline').queue_free()
 		self.queue_free()
+		
 
 
 func _on_bound_area_entered(area: Area2D) -> void:
