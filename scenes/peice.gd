@@ -1,6 +1,6 @@
 extends Node2D
 
-var selected = false
+var selected = ""
 var original_position: Vector2
 var index = 0
 var defaultIndex = 0
@@ -29,17 +29,17 @@ func returnToOriginalPosition():
 func _on_collision_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			selected = true
+			selected = "PLAYER"
 			z_index = (z_index + 100) % 10000
 		else:
 			if(index == -1): index = defaultIndex
-			selected = false
+			selected = ""
 
 func _on_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if self.name == area.get_parent().name:
 		area.get_parent().get_node('image').visible = true
 		area.get_parent().get_node('outline').queue_free()
-		area.get_parent().type = "PLAYER"
+		area.get_parent().type = selected
 		self.queue_free()
 		
 

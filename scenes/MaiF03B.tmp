@@ -1,0 +1,108 @@
+[gd_scene load_steps=7 format=3 uid="uid://8rxup4a6421d"]
+
+[ext_resource type="PackedScene" uid="uid://lfdyp8f0v353" path="res://scenes/board.tscn" id="1_getn4"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_sv46k"]
+[ext_resource type="PackedScene" uid="uid://cew0ijgoxd5ve" path="res://scenes/peice.tscn" id="2_87db0"]
+[ext_resource type="Texture2D" uid="uid://k6kilffpycsj" path="res://background.png" id="4_0x4ps"]
+[ext_resource type="PackedScene" uid="uid://cmlv77cx674e" path="res://scenes/Peices.tscn" id="5_5qjje"]
+[ext_resource type="Texture2D" uid="uid://60alea0b5bfj" path="res://wood-bg.png" id="6_j2us8"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("playerLabel", "aiLabel")]
+script = ExtResource("1_sv46k")
+playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
+aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
+piece_scene = ExtResource("2_87db0")
+
+[node name="background" type="TextureRect" parent="."]
+offset_left = -372.0
+offset_top = -208.0
+offset_right = 833.0
+offset_bottom = 1201.0
+texture = ExtResource("4_0x4ps")
+
+[node name="Board" parent="." instance=ExtResource("1_getn4")]
+position = Vector2(0, 279)
+
+[node name="Peices" parent="." instance=ExtResource("5_5qjje")]
+position = Vector2(6, 933)
+
+[node name="reference" type="TextureRect" parent="."]
+offset_left = 345.0
+offset_top = 20.0
+offset_right = 495.0
+offset_bottom = 170.0
+expand_mode = 1
+stretch_mode = 3
+
+[node name="timer" type="Label" parent="."]
+offset_left = 159.0
+offset_top = 16.0
+offset_right = 199.0
+offset_bottom = 39.0
+
+[node name="Wood-bg" type="Sprite2D" parent="."]
+position = Vector2(264, 952.5)
+scale = Vector2(1.42, 1.105)
+texture = ExtResource("6_j2us8")
+
+[node name="Restart" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 77.0
+offset_bottom = 43.0
+text = "Restart"
+
+[node name="Quit" type="Button" parent="."]
+offset_left = 91.0
+offset_top = 12.0
+offset_right = 162.0
+offset_bottom = 43.0
+text = "Quit"
+
+[node name="Wood-bg2" type="Sprite2D" parent="."]
+position = Vector2(156, 112.5)
+scale = Vector2(0.73, 0.585)
+texture = ExtResource("6_j2us8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 14.0
+offset_top = 57.0
+offset_right = 298.0
+offset_bottom = 167.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "SCORES"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Player:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "AI:"
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

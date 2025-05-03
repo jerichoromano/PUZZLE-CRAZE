@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var CSP := preload("res://scenes/CSP.gd")
+
 @export var playerLabel: Label
 @export var aiLabel: Label
 @export var piece_scene: PackedScene
