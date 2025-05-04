@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://cmlv77cx674e" path="res://scenes/Peices.tscn" id="5_5qjje"]
 [ext_resource type="Texture2D" uid="uid://60alea0b5bfj" path="res://wood-bg.png" id="6_j2us8"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("playerLabel", "aiLabel")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("playerLabel", "aiLabel", "board")]
 script = ExtResource("1_sv46k")
 playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
 aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
 piece_scene = ExtResource("2_87db0")
+board = NodePath("Board")
 
 [node name="background" type="TextureRect" parent="."]
 offset_left = -372.0
@@ -99,7 +100,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-text = "AI:"
+text = "CSP AI:"
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2

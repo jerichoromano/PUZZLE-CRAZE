@@ -11,6 +11,7 @@ var last_mouse_x = 0.0    # For tracking drag delta between frames
 
 # This is for tracking the initial scroll position when dragging starts
 var original_offset = 0.0
+var csp
 
 func _ready():
 	await get_tree().process_frame
@@ -37,7 +38,7 @@ func _ready():
 			var piece_texture = ImageTexture.create_from_image(piece_image)
 
 			var polygon = parent.polygons[y][x]
-			polygon.name = "image"
+			polygon.name = "cell_%d_%d" % [y, x]
 			polygon.texture = piece_texture
 			polygon.position = Vector2(-parent.cell_size.x * 0.5, -parent.cell_size.y * 0.5)
 			piece.add_child(polygon)
@@ -56,9 +57,14 @@ func _ready():
 		add_child(piece)
 
 	max_offset += parent.actual_size.x * 1.5
+	
+	# Start the AI after a random delay (between 1.0 and 3.0 seconds)
+	csp = parent.CSP.new()
+	var delay = randf_range(1.0, 3.0)
+	await get_tree().create_timer(delay).timeout
+	trigger_ai()
 
 func _process(delta: float) -> void:
-	# Apply drag or momentum based on the user interaction
 	if pressed:
 		handle_drag()
 	else:
@@ -169,3 +175,46 @@ func _on_enter_bound_entered(area: Area2D, curPiece) -> void:
 
 func _on_scroll_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
+
+func trigger_ai():
+	var solution = csp.solve(parent.grid_size, parent.polygons, parent.edge_data)
+	if solution: spawn_ai_solution(solution)
+	else: print("AI failed to solve the puzzle.")
+	
+	var delay = randf_range(1.0, 3.0)
+	await get_tree().create_timer(delay).timeout
+	trigger_ai()
+
+func spawn_ai_solution(solution: Dictionary) -> void:
+	# If solution is empty, exit the function
+	if solution.size() == 0:
+		return
+	
+	# Get the keys and shuffle them to ensure randomness
+	var keys = solution.keys()
+	keys.shuffle()  # Shuffle the keys for better randomness
+
+	# Loop through shuffled keys to get random positions and their corresponding polygons
+	for pos in keys:
+		var poly = solution[pos]
+		# Loop through the pieces and find the matching one
+		for piece in pieces:
+			if is_instance_valid(piece):
+				var parts = piece.name.split("_")
+				if (poly.name == piece.name):
+					setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					return  # Exit once we have matched a piece
+
+	for pos in keys:
+		var poly = solution[pos]
+		# Loop through the pieces and find the matching one
+		for piece in pieces:
+			if is_instance_valid(piece):
+				var parts = piece.name.split("_")
+				if (str(parts[1]) == str(pos.x) && str(parts[2]) == str(pos.y)):
+					setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					return  # Exit once we have matched a piece
+
+func setPiecePosition(piece, x, y):
+	piece.selected = "AI"
+	piece.global_position = parent.board.global_position + (Vector2(int(x) * parent.cell_size.x, int(y) * parent.cell_size.y) + (Vector2(parent.cell_size.x, parent.cell_size.y)/2) - parent.board.get_node('backgrund').size/2) * parent.board.scale 

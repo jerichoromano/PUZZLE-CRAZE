@@ -18,6 +18,10 @@ run/size/resizable=false
 run/size/viewport_height=2400
 run/size/viewport_width=412
 
+[autoload]
+
+GameState="*res://scenes/GameState.gd"
+
 [display]
 
 window/size/viewport_width=512

@@ -5,6 +5,7 @@ extends Node2D
 @export var playerLabel: Label
 @export var aiLabel: Label
 @export var piece_scene: PackedScene
+@export var board: Node2D
 var texture_folder_path: String = "res://images"
 var grid_size: Vector2 = Vector2(10, 10)
 var texture: Texture2D
@@ -37,14 +38,12 @@ func _ready():
 	
 	var image = texture.get_image()
 	var region = Rect2(Vector2(0, 0), Vector2(max_dimension, max_dimension))
-	print(region)
 	var piece_image = image.get_region(region)
 	var piece_texture = ImageTexture.create_from_image(piece_image)
 	$reference.name = "reference"
 	$reference.texture = piece_texture
 	$reference.stretch_mode = TextureRect.STRETCH_SCALE
 	$reference.size = Vector2(150, 150)  # Or use rect_size in Godot 3.x
-	
 	
 	
 
@@ -70,6 +69,7 @@ func generate_polygon_grid(grid_size: Vector2, cell_size: Vector2):
 			edge_data["cell_%d_%d_top" % [col, row + 1]] = -bottom
 
 			var polygon = create_jigsaw_polygon(Vector2(x, y), cell_size, left, top, right, bottom)
+			polygon.name = "cell_%d_%d_right" % [col, row]
 			row_array.append(polygon)
 		polygons.append(row_array)
 	

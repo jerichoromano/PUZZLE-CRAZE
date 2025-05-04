@@ -67,9 +67,6 @@ func _process(delta: float) -> void:
 	
 	
 	if(playerLabel + aiLabel == pieces.size()): 
-		var game_over_scene = load("res://scenes/gameOver.tscn").instantiate()
-		game_over_scene.playerTxt = playerLabel
-		game_over_scene.aiTxt = aiLabel
-		
-		get_tree().root.add_child(game_over_scene)
-		get_tree().current_scene.queue_free()  # Optional: remove current scene
+		GameState.playerTxt = playerLabel
+		GameState.aiTxt = aiLabel
+		get_tree().change_scene_to_file("res://scenes/gameOver.tscn")

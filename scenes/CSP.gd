@@ -1,60 +1,54 @@
 extends Node
-class_name PuzzleCSP
 
-var variables: Array = []
-var domains: Dictionary = {}
-var constraints: Dictionary = {}
+class_name CSP
 
-func add_variable(piece: Object, possible_positions: Array) -> void:
-	variables.append(piece)
-	domains[piece] = possible_positions
-	constraints[piece] = []
+func solve(grid_size: Vector2, polygons: Array, edge_data: Dictionary) -> Dictionary:
+	var assignment = {}
+	var positions = []
 
-func add_constraint(piece: Object, constraint_fn: Callable) -> void:
-	if not constraints.has(piece):
-		constraints[piece] = []
-	constraints[piece].append(constraint_fn)
+	for y in range(int(grid_size.y)):
+		for x in range(int(grid_size.x)):
+			if !is_instance_valid(polygons[y][x]): continue
+			positions.append(Vector2(x, y))
 
-func is_valid_assignment(assignments: Dictionary) -> bool:
-	for piece in assignments:
-		if constraints.has(piece):
-			for constraint_fn in constraints[piece]:
-				if not constraint_fn.call(assignments):
-					return false
+	return backtrack(assignment, positions, polygons, edge_data)
+
+func backtrack(assignment: Dictionary, positions: Array, polygons: Array, edge_data: Dictionary) -> Dictionary:
+	if positions.is_empty():
+		return assignment
+
+	var pos = positions.pop_front()
+
+	for row in polygons:
+		for piece in row:
+			if not piece in assignment.values():
+				if !is_instance_valid(piece): continue
+				if is_consistent(pos, piece, assignment, edge_data):
+					assignment[pos] = piece
+					var result = backtrack(assignment.duplicate(), positions.duplicate(), polygons, edge_data)
+					if  result.has("error") == false:
+						return result
+					assignment.erase(pos)
+
+	return {"error": true}
+
+func is_consistent(pos: Vector2, piece: Polygon2D, assignment: Dictionary, edge_data: Dictionary) -> bool:
+	# Check left neighbor
+	var left_pos = pos + Vector2(-1, 0)
+	if assignment.has(left_pos):
+		var left_piece = assignment[left_pos]
+		var expected_left = edge_data.get("cell_%d_%d_right" % [left_pos.x, left_pos.y], null)
+		var actual_left = edge_data.get("cell_%d_%d_left" % [pos.x, pos.y], null)
+		if expected_left != -actual_left:
+			return false
+
+	# Check top neighbor
+	var top_pos = pos + Vector2(0, -1)
+	if assignment.has(top_pos):
+		var top_piece = assignment[top_pos]
+		var expected_top = edge_data.get("cell_%d_%d_bottom" % [top_pos.x, top_pos.y], null)
+		var actual_top = edge_data.get("cell_%d_%d_top" % [pos.x, pos.y], null)
+		if expected_top != -actual_top:
+			return false
+
 	return true
-
-func solve(assignments := {}) -> Dictionary:
-	if assignments.size() == variables.size():
-		return assignments  # All assigned
-
-	var unassigned := variables.filter(func(v): return not assignments.has(v))
-	if unassigned.is_empty():
-		return assignments
-
-	var piece = unassigned[0]
-
-	for value in domains[piece]:
-		assignments[piece] = value
-		if is_valid_assignment(assignments):
-			var result = solve(assignments.duplicate())
-			if result:
-				return result
-		assignments.erase(piece)
-
-	return {}
-
-func get_solution(assignments := {}) -> Array:
-	var unassigned := variables.filter(func(v): return not assignments.has(v))
-	if unassigned.is_empty():
-		return []
-
-	var piece = unassigned[0]
-
-	var possible_solution = []
-	for value in domains[piece]:
-		assignments[piece] = value
-		if is_valid_assignment(assignments):
-			possible_solution.append(value)
-		assignments.erase(piece)
-
-	return possible_solution
