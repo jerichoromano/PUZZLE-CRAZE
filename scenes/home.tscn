@@ -1,15 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://mrpfkxxibrx"]
+[gd_scene load_steps=9 format=3 uid="uid://mrpfkxxibrx"]
 
 [ext_resource type="Script" path="res://home.gd" id="1_dmcer"]
+[ext_resource type="Texture2D" uid="uid://c6nhugim81wne" path="res://background-menu.png" id="1_qomho"]
+[ext_resource type="Texture2D" uid="uid://bbhujvuoujyfa" path="res://easy-btn.png" id="2_xftkl"]
+[ext_resource type="Texture2D" uid="uid://dk6lwomg05qou" path="res://medium-btn.png" id="3_5n4yx"]
+[ext_resource type="AudioStream" uid="uid://dj1n4c6bbkm6" path="res://sounds/main-menu.mp3" id="3_dhul2"]
+[ext_resource type="Texture2D" uid="uid://bcg25nft0s628" path="res://hard-btn.png" id="4_3us4v"]
+[ext_resource type="Texture2D" uid="uid://baivk307nd31" path="res://title-text.png" id="4_qhxpw"]
+[ext_resource type="Texture2D" uid="uid://ber8dp1hqi53j" path="res://exit-btn.png" id="5_qwnvv"]
 
-[node name="home" type="Control"]
-layout_mode = 3
+[node name="home" type="TextureRect"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_qomho")
+expand_mode = 1
 script = ExtResource("1_dmcer")
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dhul2")
+autoplay = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -26,23 +38,67 @@ theme_override_constants/margin_bottom = 30
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 30
+theme_override_constants/separation = 90
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "PUZZLE-CRAZE"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("4_qhxpw")
+expand_mode = 5
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Easy" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play"
+text = "Easy"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Easy"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -36.0
+offset_right = 391.0
+offset_bottom = 77.0
+texture = ExtResource("2_xftkl")
+
+[node name="Medium" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Medium"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Medium"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = -32.0
+offset_right = 393.0
+offset_bottom = 81.0
+texture = ExtResource("3_5n4yx")
+
+[node name="Hard" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hard"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Hard"]
+layout_mode = 0
+offset_left = 70.0
+offset_top = -32.0
+offset_right = 399.0
+offset_bottom = 82.0
+texture = ExtResource("4_3us4v")
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+flat = true
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Exit"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = -32.0
+offset_right = 392.0
+offset_bottom = 80.0
+texture = ExtResource("5_qwnvv")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Medium" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_quit_pressed"]

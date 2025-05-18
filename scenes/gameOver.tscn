@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwesury7n1g4w"]
+[gd_scene load_steps=3 format=3 uid="uid://dwesury7n1g4w"]
 
 [ext_resource type="Script" path="res://scenes/game_over.gd" id="1_wu6sw"]
+[ext_resource type="AudioStream" uid="uid://djablhfkuy23b" path="res://sounds/game-over.mp3" id="2_gbtia"]
 
 [node name="Control" type="Control" node_paths=PackedStringArray("playerLabel", "aiLabel")]
 layout_mode = 3
@@ -12,6 +13,10 @@ grow_vertical = 2
 script = ExtResource("1_wu6sw")
 playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
 aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_gbtia")
+autoplay = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

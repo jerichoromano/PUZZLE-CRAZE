@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://8rxup4a6421d"]
+[gd_scene load_steps=8 format=3 uid="uid://8rxup4a6421d"]
 
 [ext_resource type="PackedScene" uid="uid://lfdyp8f0v353" path="res://scenes/board.tscn" id="1_getn4"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_sv46k"]
 [ext_resource type="PackedScene" uid="uid://cew0ijgoxd5ve" path="res://scenes/peice.tscn" id="2_87db0"]
+[ext_resource type="AudioStream" uid="uid://dj1n4c6bbkm6" path="res://sounds/main-menu.mp3" id="3_6tare"]
 [ext_resource type="Texture2D" uid="uid://k6kilffpycsj" path="res://background.png" id="4_0x4ps"]
 [ext_resource type="PackedScene" uid="uid://cmlv77cx674e" path="res://scenes/Peices.tscn" id="5_5qjje"]
 [ext_resource type="Texture2D" uid="uid://60alea0b5bfj" path="res://wood-bg.png" id="6_j2us8"]
@@ -13,6 +14,10 @@ playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
 aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
 piece_scene = ExtResource("2_87db0")
 board = NodePath("Board")
+
+[node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6tare")
+autoplay = true
 
 [node name="background" type="TextureRect" parent="."]
 offset_left = -372.0
