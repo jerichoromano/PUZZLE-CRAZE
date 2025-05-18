@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mrpfkxxibrx"]
+[gd_scene load_steps=11 format=3 uid="uid://mrpfkxxibrx"]
 
 [ext_resource type="Script" path="res://home.gd" id="1_dmcer"]
 [ext_resource type="Texture2D" uid="uid://c6nhugim81wne" path="res://background-menu.png" id="1_qomho"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bcg25nft0s628" path="res://hard-btn.png" id="4_3us4v"]
 [ext_resource type="Texture2D" uid="uid://baivk307nd31" path="res://title-text.png" id="4_qhxpw"]
 [ext_resource type="Texture2D" uid="uid://ber8dp1hqi53j" path="res://exit-btn.png" id="5_qwnvv"]
+[ext_resource type="Texture2D" uid="uid://luhm5kf1qulx" path="res://random-btn.png" id="9_xk7be"]
+[ext_resource type="Texture2D" uid="uid://bhlm2jc6sy6nt" path="res://vs-ai-btn.png" id="10_1p0ww"]
 
 [node name="home" type="TextureRect"]
 anchors_preset = 15
@@ -98,7 +100,45 @@ offset_right = 392.0
 offset_bottom = 80.0
 texture = ExtResource("5_qwnvv")
 
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Random" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "                                       "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Random"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -11.0
+offset_right = 346.0
+offset_bottom = 95.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xk7be")
+expand_mode = 3
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AI" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "                                      "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/AI"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = -14.0
+offset_right = 332.0
+offset_bottom = 98.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_1p0ww")
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Easy" to="." method="_on_easy_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Medium" to="." method="_on_medium_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Hard" to="." method="_on_hard_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Random" to="." method="_on_random_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/AI" to="." method="_on_ai_pressed"]

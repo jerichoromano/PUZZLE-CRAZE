@@ -1,18 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwesury7n1g4w"]
+[gd_scene load_steps=8 format=3 uid="uid://dwesury7n1g4w"]
 
 [ext_resource type="Script" path="res://scenes/game_over.gd" id="1_wu6sw"]
+[ext_resource type="Texture2D" uid="uid://c6nhugim81wne" path="res://background-menu.png" id="1_wwm32"]
 [ext_resource type="AudioStream" uid="uid://djablhfkuy23b" path="res://sounds/game-over.mp3" id="2_gbtia"]
+[ext_resource type="Texture2D" uid="uid://dj2rknq2vahtk" path="res://retry-btn.png" id="3_3a0fh"]
+[ext_resource type="Texture2D" uid="uid://doybrcgssbcjy" path="res://gameover.png" id="4_1l505"]
+[ext_resource type="Texture2D" uid="uid://ber8dp1hqi53j" path="res://exit-btn.png" id="4_iqfpl"]
+[ext_resource type="Texture2D" uid="uid://60alea0b5bfj" path="res://wood-bg.png" id="5_y2hwu"]
 
-[node name="Control" type="Control" node_paths=PackedStringArray("playerLabel", "aiLabel")]
-layout_mode = 3
+[node name="Control" type="TextureRect" node_paths=PackedStringArray("playerLabel", "aiLabel")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("1_wwm32")
+expand_mode = 1
+flip_v = true
 script = ExtResource("1_wu6sw")
-playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
-aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
+playerLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer/Label2")
+aiLabel = NodePath("MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer2/Label2")
 
 [node name="backgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_gbtia")
@@ -33,48 +40,85 @@ theme_override_constants/margin_bottom = 30
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 30
+theme_override_constants/separation = 90
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 42
-text = "Game Over"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_1l505")
+expand_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_y2hwu")
+expand_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 23.0
+offset_right = 406.0
+offset_bottom = 140.0
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Player:"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "AI:"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/TextureRect/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Retry"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Play"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = -40.0
+offset_right = 385.0
+offset_bottom = 73.0
+texture = ExtResource("3_3a0fh")
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit
 "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/Quit"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = -26.0
+offset_right = 387.0
+offset_bottom = 86.0
+texture = ExtResource("4_iqfpl")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

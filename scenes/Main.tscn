@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://8rxup4a6421d"]
+[gd_scene load_steps=10 format=3 uid="uid://8rxup4a6421d"]
 
 [ext_resource type="PackedScene" uid="uid://lfdyp8f0v353" path="res://scenes/board.tscn" id="1_getn4"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_sv46k"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://k6kilffpycsj" path="res://background.png" id="4_0x4ps"]
 [ext_resource type="PackedScene" uid="uid://cmlv77cx674e" path="res://scenes/Peices.tscn" id="5_5qjje"]
 [ext_resource type="Texture2D" uid="uid://60alea0b5bfj" path="res://wood-bg.png" id="6_j2us8"]
+[ext_resource type="Texture2D" uid="uid://bylybqe346wsh" path="res://restart-btn.png" id="8_g56r2"]
+[ext_resource type="Texture2D" uid="uid://byys0fb0niwfq" path="res://quit-btn.png" id="9_t5lce"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("playerLabel", "aiLabel", "board")]
 script = ExtResource("1_sv46k")
@@ -47,8 +49,8 @@ offset_right = 199.0
 offset_bottom = 39.0
 
 [node name="Wood-bg" type="Sprite2D" parent="."]
-position = Vector2(264, 952.5)
-scale = Vector2(1.42, 1.105)
+position = Vector2(261, 916.5)
+scale = Vector2(0.626444, 0.552817)
 texture = ExtResource("6_j2us8")
 
 [node name="Restart" type="Button" parent="."]
@@ -56,18 +58,37 @@ offset_left = 12.0
 offset_top = 12.0
 offset_right = 77.0
 offset_bottom = 43.0
-text = "Restart"
+text = "                             "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Restart"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 325.0
+offset_bottom = 112.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("8_g56r2")
 
 [node name="Quit" type="Button" parent="."]
-offset_left = 91.0
-offset_top = 12.0
-offset_right = 162.0
-offset_bottom = 43.0
-text = "Quit"
+offset_left = 151.0
+offset_top = 14.0
+offset_right = 280.0
+offset_bottom = 45.0
+text = "                             "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Quit"]
+layout_mode = 0
+offset_left = -0.999985
+offset_top = -4.0
+offset_right = 328.0
+offset_bottom = 110.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_t5lce")
 
 [node name="Wood-bg2" type="Sprite2D" parent="."]
-position = Vector2(156, 112.5)
-scale = Vector2(0.73, 0.585)
+position = Vector2(140, 110.5)
+scale = Vector2(0.346598, 0.397887)
 texture = ExtResource("6_j2us8")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
