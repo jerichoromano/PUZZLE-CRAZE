@@ -25,7 +25,7 @@ func _on_random_pressed() -> void:
 
 
 func _on_ai_pressed() -> void:
-	GameState.randomLevel()
+	GameState.vsAILevel()
 	_on_play_pressed()
 
 

@@ -44,6 +44,8 @@ func _on_area_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: 
 		area.get_parent().type = selected
 		if(selected == 'PLAYER'): area.get_parent().get_node('placeSoundEffect').play()
 		else: area.get_parent().get_node('aiPlaceSoundEffect').play()
+		area.get_parent().get_node('glow').visible = false
+		self.get_node('glow').visible = false
 		self.queue_free()
 		
 

@@ -6,6 +6,7 @@ extends Control
 func _ready():
 	playerLabel.text = str(GameState.playerTxt)
 	aiLabel.text = str(GameState.aiTxt)
+	if(GameState.mode != 'VS_AI'): $MarginContainer/VBoxContainer/VBoxContainer/scoreBoard.visible = false
 	
 func _on_play_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")

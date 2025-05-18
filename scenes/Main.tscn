@@ -12,8 +12,8 @@
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("playerLabel", "aiLabel", "board")]
 script = ExtResource("1_sv46k")
-playerLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Label2")
-aiLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer2/Label2")
+playerLabel = NodePath("scoreBoard/VBoxContainer/HBoxContainer/Label2")
+aiLabel = NodePath("scoreBoard/VBoxContainer/HBoxContainer2/Label2")
 piece_scene = ExtResource("2_87db0")
 board = NodePath("Board")
 
@@ -86,12 +86,7 @@ offset_bottom = 110.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("9_t5lce")
 
-[node name="Wood-bg2" type="Sprite2D" parent="."]
-position = Vector2(140, 110.5)
-scale = Vector2(0.346598, 0.397887)
-texture = ExtResource("6_j2us8")
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="scoreBoard" type="MarginContainer" parent="."]
 offset_left = 14.0
 offset_top = 57.0
 offset_right = 298.0
@@ -101,34 +96,39 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="Wood-bg2" type="Sprite2D" parent="scoreBoard"]
+position = Vector2(126, 53.5)
+scale = Vector2(0.346598, 0.397887)
+texture = ExtResource("6_j2us8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="scoreBoard"]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="scoreBoard/VBoxContainer"]
 layout_mode = 2
 text = "SCORES"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="scoreBoard/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="scoreBoard/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Player:"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="scoreBoard/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="scoreBoard/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="scoreBoard/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "CSP AI:"
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label2" type="Label" parent="scoreBoard/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

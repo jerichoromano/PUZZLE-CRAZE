@@ -21,8 +21,9 @@ func _ready():
 	var grid_x = GameState.grid_x
 	var grid_y = GameState.grid_y
 	grid_size = Vector2(grid_x, grid_y)
-	
 	texture = GameState.texture
+	
+	if(GameState.mode != 'VS_AI'): $scoreBoard.visible = false
 	
 	if texture == null:
 		push_error("No valid textures found in folder!")
@@ -107,6 +108,7 @@ func create_jigsaw_polygon(position: Vector2, size: Vector2, left: float, top: f
 
 func _on_restart_pressed() -> void:
 	if(GameState.mode=='RANDOM'): GameState.randomLevel()
+	if(GameState.mode=='VS_AI'): GameState.vsAILevel()
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
 	pass # Replace with function body.
 

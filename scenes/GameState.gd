@@ -12,6 +12,8 @@ var grid_x
 var grid_y
 var texture
 
+var csp = CSP.new()
+
 func easyLevel():
 	mode = 'EASY'
 	grid_x = 3
@@ -34,6 +36,13 @@ func hardLevel():
 		
 func randomLevel():
 	mode = 'RANDOM'
+	randomize()  # Initialize random seed
+	grid_x = randi_range(2, 7)
+	grid_y = randi_range(2, 7)
+	loadRamdomImage()
+	
+func vsAILevel():
+	mode = 'VS_AI'
 	randomize()  # Initialize random seed
 	grid_x = randi_range(2, 7)
 	grid_y = randi_range(2, 7)

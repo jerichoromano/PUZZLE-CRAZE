@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://lfdyp8f0v353"]
+
+[ext_resource type="Script" path="res://scenes/board.gd" id="1_pv4wm"]
+[ext_resource type="Texture2D" uid="uid://lb4o5yfq4b68" path="res://icon.svg" id="2_rigtr"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_pv4wm")
+
+[node name="backgrund" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.764706, 0.654902, 0.407843, 1)
+
+[node name="Icon" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_rigtr")

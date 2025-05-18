@@ -11,12 +11,13 @@ var last_mouse_x = 0.0    # For tracking drag delta between frames
 
 # This is for tracking the initial scroll position when dragging starts
 var original_offset = 0.0
-var csp
+var lastPieceCount
 
 func _ready():
 	await get_tree().process_frame
 	parent = get_parent()
 	var image = parent.texture.get_image()
+	lastPieceCount = parent.grid_size.x * parent.grid_size.y
 
 	# Initialize pieces as before
 	for x in range(parent.grid_size.x):
@@ -42,6 +43,35 @@ func _ready():
 			polygon.texture = piece_texture
 			polygon.position = Vector2(-parent.cell_size.x * 0.5, -parent.cell_size.y * 0.5)
 			piece.add_child(polygon)
+			
+			# Add pulsing glow effect
+			var glow = Polygon2D.new()
+			glow.name = "glow"
+			glow.polygon = polygon.polygon.duplicate()
+			glow.position = polygon.position
+			glow.visible = false
+			glow.z_index = 100  # Behind the polygon
+			glow.color = Color(1, 1, 0, 0.6)
+			
+			var shader = Shader.new()
+			shader.code = """
+			shader_type canvas_item;
+
+			uniform float time;
+			uniform vec4 base_color : source_color = vec4(1.0, 1.0, 0.0, 0.6);
+
+			void fragment() {
+				float pulse = 0.6 + 0.4 * sin(time * 3.0);
+				COLOR = base_color;
+				COLOR.a *= pulse;
+			}
+			"""
+			
+			var shader_material = ShaderMaterial.new()
+			shader_material.shader = shader
+			glow.material = shader_material
+			
+			piece.add_child(glow)
 
 			pieces.append(piece)
 
@@ -59,16 +89,39 @@ func _ready():
 	max_offset += parent.actual_size.x * 1.5
 	
 	# Start the AI after a random delay (between 1.0 and 3.0 seconds)
-	csp = parent.CSP.new()
+	
 	var delay = randf_range(1.0, 3.0)
 	await get_tree().create_timer(delay).timeout
-	trigger_ai()
+				
+	if(GameState.mode == 'VS_AI'): trigger_ai()
+	else:
+		delay = randf_range(10.0, 15.0)
+		await get_tree().create_timer(delay).timeout
+		ai_analize()
 
 func _process(delta: float) -> void:
 	if pressed:
 		handle_drag()
 	else:
 		apply_momentum(delta)
+
+	var pieceCount = 0
+	for piece in pieces:
+		if is_instance_valid(piece):
+			pieceCount = pieceCount + 1
+			# Update glow shader time uniform for pulsing effect
+			var glow = piece.get_node_or_null("glow")
+			if glow and glow.material:
+				glow.material.set_shader_parameter("time", Time.get_ticks_msec() / 1000.0)
+	
+	if(pieceCount != lastPieceCount):
+		lastPieceCount = pieceCount
+		
+		var delay = randf_range(10.0, 15.0)
+		await get_tree().create_timer(delay).timeout
+		ai_analize()
+	
+		
 
 func handle_drag():
 	var mouse_x = get_global_mouse_position().x
@@ -177,13 +230,16 @@ func _on_scroll_area_entered(area: Area2D) -> void:
 	pass # Replace with function body.
 
 func trigger_ai():
-	var solution = csp.solve(parent.grid_size, parent.polygons, parent.edge_data)
-	if solution: spawn_ai_solution(solution)
-	else: print("AI failed to solve the puzzle.")
+	ai_analize()
 	
 	var delay = randf_range(1.0, 3.0)
 	await get_tree().create_timer(delay).timeout
 	trigger_ai()
+	
+func ai_analize():
+	var solution = GameState.csp.solve(parent.grid_size, parent.polygons, parent.edge_data)
+	if solution: spawn_ai_solution(solution)
+	else: print("AI failed to solve the puzzle.")
 
 func spawn_ai_solution(solution: Dictionary) -> void:
 	# If solution is empty, exit the function
@@ -192,7 +248,7 @@ func spawn_ai_solution(solution: Dictionary) -> void:
 	
 	# Get the keys and shuffle them to ensure randomness
 	var keys = solution.keys()
-	keys.shuffle()  # Shuffle the keys for better randomness
+	if(GameState.mode == 'VS_AI'): keys.shuffle()  # Shuffle the keys for better randomness
 
 	# Loop through shuffled keys to get random positions and their corresponding polygons
 	for pos in keys:
@@ -202,7 +258,12 @@ func spawn_ai_solution(solution: Dictionary) -> void:
 			if is_instance_valid(piece):
 				var parts = piece.name.split("_")
 				if (poly.name == piece.name):
-					setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					if(GameState.mode=='VS_AI'): setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					else: 
+						var glow = piece.get_node_or_null("glow")
+						glow.visible = true
+						glow = parent.board.get_node_or_null(str(piece.name)).get_node_or_null("glow")
+						glow.visible = true
 					return  # Exit once we have matched a piece
 
 	for pos in keys:
@@ -212,7 +273,12 @@ func spawn_ai_solution(solution: Dictionary) -> void:
 			if is_instance_valid(piece):
 				var parts = piece.name.split("_")
 				if (str(parts[1]) == str(pos.x) && str(parts[2]) == str(pos.y)):
-					setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					if(GameState.mode=='VS_AI'): setPiecePosition(piece, parts[1],parts[2])  # Set position once match is found
+					else: 
+						var glow = piece.get_node_or_null("glow")
+						glow.visible = true
+						glow = parent.board.get_node_or_null(str(piece.name)).get_node_or_null("glow")
+						glow.visible = true
 					return  # Exit once we have matched a piece
 
 func setPiecePosition(piece, x, y):

@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://u4loes7vto14"
+path="res://.godot/imported/pulse.gif-3d01ccb8a25cc0f9e21ee4d4d1356dc3.tres"
+
+[deps]
+
+source_file="res://pulse.gif"
+dest_files=["res://.godot/imported/pulse.gif-3d01ccb8a25cc0f9e21ee4d4d1356dc3.tres"]
+
+[params]
+
+frames_per_second=30
