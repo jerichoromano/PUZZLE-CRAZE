@@ -18,12 +18,11 @@ var max_dimension
 
 func _ready():
 	randomize()  # Initialize random seed
-
-	var grid_x = randi_range(2, 7)
-	var grid_y = randi_range(2, 7)
+	var grid_x = GameState.grid_x
+	var grid_y = GameState.grid_y
 	grid_size = Vector2(grid_x, grid_y)
 	
-	texture = load_random_texture_from_folder(texture_folder_path)
+	texture = GameState.texture
 	
 	if texture == null:
 		push_error("No valid textures found in folder!")
@@ -105,31 +104,9 @@ func create_jigsaw_polygon(position: Vector2, size: Vector2, left: float, top: f
 	poly.position = position
 	return poly
 	
-func load_random_texture_from_folder(folder_path: String) -> Texture2D:
-	# Manually list textures instead of reading the folder
-	var texture_paths = [
-		"res://images/1.webp",
-		"res://images/2.jpg",
-		"res://images/3.jpg",
-		"res://images/4.jpg",
-		"res://images/5.jpg",
-		# Add all expected image paths here
-	]
-
-	var textures := []
-	for path in texture_paths:
-		var tex = load(path)
-		if tex is Texture2D:
-			textures.append(tex)
-
-	if textures.size() == 0:
-		push_error("No valid textures found in hardcoded list!")
-		return null
-
-	return textures[randi() % textures.size()]
-
 
 func _on_restart_pressed() -> void:
+	if(GameState.mode=='RANDOM'): GameState.randomLevel()
 	get_tree().change_scene_to_file("res://scenes/Main.tscn")
 	pass # Replace with function body.
 
