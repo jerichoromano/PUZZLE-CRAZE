@@ -114,5 +114,7 @@ func _on_restart_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Home.tscn")
+	if(GameState.mode=='RANDOM'): GameState.randomLevel()
+	if(GameState.mode=='VS_AI'): GameState.vsAILevel()
+	get_tree().change_scene_to_file("res://scenes/home.tscn")
 	pass # Replace with function body.

@@ -36,9 +36,9 @@ position = Vector2(6, 933)
 
 [node name="reference" type="TextureRect" parent="."]
 offset_left = 345.0
-offset_top = 20.0
+offset_top = 52.0
 offset_right = 495.0
-offset_bottom = 170.0
+offset_bottom = 202.0
 expand_mode = 1
 stretch_mode = 3
 
@@ -53,51 +53,18 @@ position = Vector2(261, 916.5)
 scale = Vector2(0.626444, 0.552817)
 texture = ExtResource("6_j2us8")
 
-[node name="Restart" type="Button" parent="."]
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 77.0
-offset_bottom = 43.0
-text = "                             "
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="Restart"]
-layout_mode = 0
-offset_top = -1.0
-offset_right = 325.0
-offset_bottom = 112.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("8_g56r2")
-
-[node name="Quit" type="Button" parent="."]
-offset_left = 151.0
-offset_top = 14.0
-offset_right = 280.0
-offset_bottom = 45.0
-text = "                             "
-flat = true
-
-[node name="TextureRect" type="TextureRect" parent="Quit"]
-layout_mode = 0
-offset_left = -0.999985
-offset_top = -4.0
-offset_right = 328.0
-offset_bottom = 110.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("9_t5lce")
-
 [node name="scoreBoard" type="MarginContainer" parent="."]
-offset_left = 14.0
-offset_top = 57.0
-offset_right = 298.0
-offset_bottom = 167.0
+offset_left = 10.0
+offset_top = 105.0
+offset_right = 294.0
+offset_bottom = 215.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="Wood-bg2" type="Sprite2D" parent="scoreBoard"]
-position = Vector2(126, 53.5)
+position = Vector2(133, 48)
 scale = Vector2(0.346598, 0.397887)
 texture = ExtResource("6_j2us8")
 
@@ -130,6 +97,44 @@ text = "CSP AI:"
 
 [node name="Label2" type="Label" parent="scoreBoard/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+
+[node name="Restart" type="Button" parent="."]
+z_index = 1000
+offset_left = 15.0
+offset_top = 54.0
+offset_right = 144.0
+offset_bottom = 85.0
+text = "                             "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Restart"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -4.0
+offset_right = 326.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("8_g56r2")
+metadata/_edit_lock_ = true
+
+[node name="Quit" type="Button" parent="."]
+z_index = 1000
+offset_left = 152.0
+offset_top = 54.0
+offset_right = 281.0
+offset_bottom = 85.0
+text = "                             "
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Quit"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -5.0
+offset_right = 331.0
+offset_bottom = 109.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_t5lce")
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
