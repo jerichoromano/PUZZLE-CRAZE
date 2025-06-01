@@ -103,3 +103,9 @@ func _process(delta: float) -> void:
 		GameState.playerTxt = playerLabel
 		GameState.aiTxt = aiLabel
 		get_tree().change_scene_to_file("res://scenes/gameOver.tscn")
+		if(GameState.mode=='RANDOM'): pass
+		if(GameState.mode=='VS_AI'): pass
+		
+		if(GameState.mode=='EASY'): GameState.easy = 1
+		if(GameState.mode=='MEDIUM'): GameState.medium = 1
+		if(GameState.mode=='HARD'): GameState.hard = 1

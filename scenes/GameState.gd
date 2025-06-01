@@ -12,6 +12,10 @@ var grid_x
 var grid_y
 var texture
 
+var easy = 0
+var medium = 0
+var hard = 0
+
 var csp = CSP.new()
 
 func easyLevel():
